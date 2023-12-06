@@ -1,0 +1,103 @@
+body {
+  margin: 0;
+  padding: 0;
+  width:378px;
+}
+@page {
+  size: 100mm 148mm;
+}
+@media screen {
+  .front,
+  .back {
+    margin-top: 5px;
+  }
+  .front{
+    background-color: rgb(110, 255, 110);
+  }
+  .back{
+    background-color: aqua;
+  }
+}
+@media print {
+  .front,
+  .back {
+    margin: 0;
+    padding: 0;
+  }
+}
+.front,
+.back {
+  position: relative;
+  padding: 0;
+  width: 378px;
+  height: 560px;
+  border: none;
+  break-before: page;
+  page-break-before: always;
+  overflow: hidden;
+}
+.destPostalCode{
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width:5.7mm;
+  height:8.0mm;
+  top:12mm;
+  line-height: 8mm;
+  text-align: center;
+}
+.DPC1{left:44.3mm;}.DPC2{left:51.3mm;}.DPC3{left:58.3mm;}.DPC4{left:65.9mm;}.DPC5{left:72.7mm;}.DPC6{left:79.5mm;}.DPC7{left:86.3mm;}
+.destAddress{
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top:30mm;
+  right:10mm;
+  writing-mode: vertical-rl;
+}
+.destName{
+  display: flex;
+  align-items: center;
+  position: absolute;
+  padding: 0;
+  top:40mm;
+  right: 0;
+  left: 0;
+  font-size:20pt;
+  writing-mode: vertical-rl;
+}
+.origPostalCode{
+  position:absolute;
+  font-size:11pt;
+  top:122mm;
+  width:14px;
+  height:24px;
+  line-height: 24px;
+  text-align: center;
+}
+.origAddress{
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  bottom: 110px;
+  right:70mm;
+  writing-mode: vertical-rl;
+}
+.origName{
+  display: flex;
+  align-items: center;
+  position: absolute;
+  padding: 0;
+  bottom: 110px;
+  right: 85mm;
+  writing-mode: vertical-rl;
+}
+.OPC1{left:22px;}.OPC2{left:37px;}.OPC3{left:52px;}.OPC4{left:71px;}.OPC5{left:86px;}.OPC6{left:101px;}.OPC7{left:116px;}
+.images {
+  position: absolute;
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
