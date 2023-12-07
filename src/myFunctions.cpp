@@ -184,7 +184,7 @@ int generateHtml(addressBook book){
   std::getline(html, htmlTemplate, '\0');
 
   imageTemplate = R"(
-.{クラス名}{
+.pic_{クラス名}{
   background-image: url(data:image/{画像形式};base64,{画像データ});
   background-size: 100% 100%;
 }
