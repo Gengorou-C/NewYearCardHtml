@@ -184,7 +184,7 @@ int generateHtml(addressBook book){
   std::getline(html, htmlTemplate, '\0');
 
   imageTemplate = R"(
-.pic_{クラス名}{
+.{クラス名}{
   background-image: url(data:image/{画像形式};base64,{画像データ});
   background-size: 100% 100%;
 }
@@ -220,6 +220,7 @@ int generateHtml(addressBook book){
       std::string className;
       className = std::filesystem::path(book.getList()[i].getPicturePathStr()).stem().string();
       className = std::regex_replace(className, std::regex(" "), "_");
+      className = "pic_" + className;
       bufferStr = std::regex_replace(bufferStr, std::regex("class=\"back\""), "class=\"back " + className + "\"");
     }
     generatedHtml = generatedHtml + bufferStr;
@@ -233,6 +234,7 @@ int generateHtml(addressBook book){
     std::string className;
     className = std::filesystem::path(key).stem().string();
     className = std::regex_replace(className, std::regex(" "), "_");
+    className = "pic_" + className;
     bufferStr = std::regex_replace(bufferStr, std::regex("\\{クラス名\\}"), className);
 
     std::string extName;
