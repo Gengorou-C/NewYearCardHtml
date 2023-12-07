@@ -108,7 +108,7 @@ std::vector<std::vector<std::string>> csvTo2dVector(char* csvPathStr){
 }
 
 std::string pathToBase64(std::string pathStr){
-  std::filesystem::path path = std::filesystem::u8path(pathStr);
+  std::filesystem::path path(pathStr);
   path.make_preferred();
   std::ifstream ifs(path, std::ios::in | std::ios::binary);
   if(!ifs){

@@ -42,7 +42,7 @@ int personalData::setPicturePathStr(std::string picturePathStr){
   if(picturePathStr.empty()){
     picturePathStr = "";
   }else{
-    picturePathStr = std::filesystem::absolute(picturePathStr).string();
+    picturePathStr = std::filesystem::absolute(std::filesystem::u8path(picturePathStr)).string();
   }
   this->picturePathStr = picturePathStr;
   return 0;
