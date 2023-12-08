@@ -113,7 +113,7 @@ std::string pathToBase64(std::string pathStr){
   std::ifstream ifs(path, std::ios::in | std::ios::binary);
   if(!ifs){
     outputLog("Error", "画像の読み込みに失敗 could not load picture");
-    outputLog("Error", "->target picture \"" + path.string() +'\"');
+    outputLog("Error", " -> target picture \"" + path.u8string() +'\"');
     exit(EXIT_FAILURE);
   }
   size_t fileSize = std::filesystem::file_size(path);
@@ -253,6 +253,6 @@ int generateHtml(addressBook book){
 </html>)";
   output << generatedHtml << std::endl;
   output.close();
-  outputLog(" log ", "完了 finish.\n");
+  outputLog(" log ", "HTMLの生成完了 HTML file generation complete");
   return 0;
 }
