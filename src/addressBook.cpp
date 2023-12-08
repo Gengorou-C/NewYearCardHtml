@@ -51,19 +51,19 @@ int addressBook::loadCsv(char* csvPathStr){
     }
   }
   if(nameColumnNumber == -1){
-    outputLog("Error", "名前の列がありません。 name column not found.");
+    outputLog("ERROR", "名前の列がありません。 name column not found.");
     exit(EXIT_FAILURE);
   }
   if(addressColumnNumber == -1){
-    outputLog("Error", "住所の列がありません。 address column not found.");
+    outputLog("ERROR", "住所の列がありません。 address column not found.");
     exit(EXIT_FAILURE);
   }
   if(postalCodeColumnNumber == -1){
-    outputLog("Error","郵便番号の列がありません。 postal code column not found.");
+    outputLog("ERROR","郵便番号の列がありません。 postal code column not found.");
     exit(EXIT_FAILURE);
   }
   if(pictureColumnNumber == -1){
-    outputLog("Info ","画像(裏面)の列がありません。 picture column not found.");
+    outputLog("INFO ","画像(裏面)の列がありませんでした。 picture column not found.");
     isPictureExist = false;
   }
 
@@ -76,7 +76,7 @@ int addressBook::loadCsv(char* csvPathStr){
       this->list.push_back(personalData(strVector[i].at(nameColumnNumber), strVector[i].at(addressColumnNumber), strVector[i].at(postalCodeColumnNumber), ""));
     }
   }
-  outputLog(" log ", "住所録の読み込み完了 csv loading complete");
+  outputLog("INFO ", "住所録の読み込み完了 csv loading complete");
   return 0;
 }
 

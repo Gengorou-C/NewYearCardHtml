@@ -71,7 +71,7 @@ std::vector<std::vector<std::string>> csvTo2dVector(char* csvPathStr){
 
   std::ifstream ifs(csvPathStr);
   if(!ifs){
-    outputLog("Error", "csvファイルの読み込みに失敗 could not load csv file");
+    outputLog("ERROR", "csvファイルの読み込みに失敗 could not load csv file");
     exit(EXIT_FAILURE);
   }
   std::getline(ifs, strBuffer, '\0');
@@ -97,7 +97,7 @@ std::vector<std::vector<std::string>> csvTo2dVector(char* csvPathStr){
       strBuffer = strBuffer.substr(separatorPosition+1);
     }
     if(peopleCounter > 2147483646){
-      outputLog("Error", "無限ループかも。 maybe infinite loop.");
+      outputLog("ERROR", "無限ループかも。 maybe infinite loop.");
       break;
     }
   }
@@ -112,8 +112,8 @@ std::string pathToBase64(std::string pathStr){
   path.make_preferred();
   std::ifstream ifs(path, std::ios::in | std::ios::binary);
   if(!ifs){
-    outputLog("Error", "画像の読み込みに失敗 could not load picture");
-    outputLog("Error", " -> target picture \"" + path.u8string() +'\"');
+    outputLog("ERROR", "画像の読み込みに失敗 could not load picture");
+    outputLog("ERROR", " -> target picture \"" + path.u8string() +'\"');
     exit(EXIT_FAILURE);
   }
   size_t fileSize = std::filesystem::file_size(path);
@@ -170,11 +170,11 @@ int generateHtml(addressBook book){
   std::filesystem::create_directories(outputDir);
   std::ofstream output(outputDir + "/" + outputFile);
   if(!css){
-    outputLog("Error", "cssのテンプレートファイルの読み込みに失敗 could not load cssTemplate.txt");
+    outputLog("ERROR", "cssのテンプレートファイルの読み込みに失敗 could not load cssTemplate.txt");
     exit(EXIT_FAILURE);
   }
   if(!html){
-    outputLog("Error", "htmlのテンプレートファイルの読み込みに失敗 could not load htmlTemplate.txt");
+    outputLog("ERROR", "htmlのテンプレートファイルの読み込みに失敗 could not load htmlTemplate.txt");
     exit(EXIT_FAILURE);
   }
   std::string cssTemplate;
@@ -253,6 +253,6 @@ int generateHtml(addressBook book){
 </html>)";
   output << generatedHtml << std::endl;
   output.close();
-  outputLog(" log ", "HTMLの生成完了 HTML file generation complete");
+  outputLog("INFO ", "HTMLの生成完了 HTML file generation complete");
   return 0;
 }
