@@ -8,7 +8,7 @@
 #include <regex>
 #include <filesystem>
 
-std::string getDateAndTimeStr() {
+std::string getDatetimeStr() {
     time_t t = time(nullptr);
     const tm* localTime = localtime(&t);
     std::stringstream s;
@@ -20,7 +20,9 @@ std::string getDateAndTimeStr() {
     s << std::setw(2) << std::setfill('0') << localTime->tm_mday;
     s << "T";
     s << std::setw(2) << std::setfill('0') << localTime->tm_hour;
+    s << "_";
     s << std::setw(2) << std::setfill('0') << localTime->tm_min;
+    s << "_";
     s << std::setw(2) << std::setfill('0') << localTime->tm_sec;
     // std::stringにして値を返す
     return s.str();
@@ -29,8 +31,8 @@ std::string getDateAndTimeStr() {
 int outputLog(std::string level, std::string content){
   std::ofstream log;
   log.open("./NewYearCardHtml.log", std::ios_base::app);
-  std::cout <<  "[" << getDateAndTimeStr() << "] [" << level << "]" << content << '\n';
-  log << "[" << getDateAndTimeStr() << "] [" << level << "]" << content << '\n'; 
+  std::cout <<  "[" << getDatetimeStr() << "] [" << level << "]" << content << '\n';
+  log << "[" << getDatetimeStr() << "] [" << level << "]" << content << '\n'; 
   log.close();
   return 0;
 }
@@ -165,7 +167,7 @@ std::string pathToBase64(std::string pathStr){
 int generateHtml(addressBook book){
   std::ifstream css("./cssTemplate.txt");
   std::ifstream html("./htmlTemplate.txt");
-  std::string outputDir = "./" + std::filesystem::path(book.getCsvPathStr()).stem().string() + "/" + getDateAndTimeStr();
+  std::string outputDir = "./" + std::filesystem::path(book.getCsvPathStr()).stem().string() + "/" + getDatetimeStr();
   std::string outputFile = std::filesystem::path(book.getCsvPathStr()).stem().string() + ".html";
   std::filesystem::create_directories(outputDir);
   std::ofstream output(outputDir + "/" + outputFile);

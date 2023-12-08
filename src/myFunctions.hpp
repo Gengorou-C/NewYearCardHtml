@@ -4,7 +4,7 @@
 #include <string>
 #include "addressBook.hpp"
 
-std::string getDateAndTimeStr();
+std::string getDatetimeStr();
 
 int outputLog(std::string level, std::string content);
 
