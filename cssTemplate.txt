@@ -99,11 +99,3 @@ body {
   writing-mode: vertical-rl;
   font-size: 14pt;
 }
-.images {
-  position: absolute;
-  display: block;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-}
