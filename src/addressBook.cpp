@@ -15,8 +15,8 @@ std::string addressBook::getCsvPathStr(){
   return csvPathStr;
 }
 
-std::vector<personalData> addressBook::getList(){
-  return list;
+std::vector<personalData> addressBook::getPeopleList(){
+  return peopleList;
 };
 
 std::map<std::string, std::string> addressBook::getPictureList(){
@@ -32,11 +32,10 @@ int addressBook::loadCsv(char* csvPathStr){
   int addressColumnNumber = -1;
   int postalCodeColumnNumber = -1;
   int pictureColumnNumber = -1;
-  int peopleCounter = 0;
-  int separatorPosition;
-  std::string buffer;
   std::vector<std::vector<std::string>> strVector;
   strVector = csvTo2dVector(csvPathStr);
+  NumberOfPeople = strVector.size() - 1;
+  peopleList.reserve(NumberOfPeople);
 
   for(int i=0; i < strVector[0].size(); i++){
     if(strVector[0][i] == "氏名" || strVector[0][i] == "名前" || strVector[0][i] == "name"){
@@ -68,12 +67,12 @@ int addressBook::loadCsv(char* csvPathStr){
   }
 
   if(isPictureExist){
-    for(int i=1; i < strVector.size(); i++){
-      this->list.push_back(personalData(strVector[i].at(nameColumnNumber), strVector[i].at(addressColumnNumber), strVector[i].at(postalCodeColumnNumber), strVector[i].at(pictureColumnNumber)));
+    for(int i=1; i <= NumberOfPeople; i++){
+      this->peopleList.push_back(personalData(strVector[i].at(nameColumnNumber), strVector[i].at(addressColumnNumber), strVector[i].at(postalCodeColumnNumber), strVector[i].at(pictureColumnNumber)));
     }
   }else{
-    for(int i=1; i < strVector.size(); i++){
-      this->list.push_back(personalData(strVector[i].at(nameColumnNumber), strVector[i].at(addressColumnNumber), strVector[i].at(postalCodeColumnNumber), ""));
+    for(int i=1; i <= NumberOfPeople; i++){
+      this->peopleList.push_back(personalData(strVector[i].at(nameColumnNumber), strVector[i].at(addressColumnNumber), strVector[i].at(postalCodeColumnNumber), ""));
     }
   }
   outputLog("INFO ", "住所録の読み込み完了 csv loading complete");
@@ -82,9 +81,9 @@ int addressBook::loadCsv(char* csvPathStr){
 
 int addressBook::makePictureList(){
   if(!isPictureExist) return 0;
-  for(int i=0; i < list.size(); i++){
-    if(pictureList.count(list[i].getPicturePathStr()) == 0 && list[i].getPicturePathStr() != ""){
-      pictureList[list[i].getPicturePathStr()] = pathToBase64(list[i].getPicturePathStr());
+  for(int i=1; i < NumberOfPeople; i++){
+    if(pictureList.count(peopleList[i].getPicturePathStr()) == 0 && peopleList[i].getPicturePathStr() != ""){
+      pictureList[peopleList[i].getPicturePathStr()] = pathToBase64(peopleList[i].getPicturePathStr());
     }
   }
   return 0;

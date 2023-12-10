@@ -9,7 +9,8 @@
 class addressBook{
   private:
     std::string csvPathStr;
-    std::vector<personalData> list;
+    std::vector<personalData> peopleList;
+    int NumberOfPeople;
     std::map<std::string, std::string> pictureList;
     bool isPictureExist;
     int loadCsv(char* path);
@@ -19,7 +20,7 @@ class addressBook{
     addressBook(char* path);
 
     std::string getCsvPathStr();
-    std::vector<personalData> getList();
+    std::vector<personalData> getPeopleList();
     std::map<std::string, std::string> getPictureList();
     bool getIsPictureExist();
 };

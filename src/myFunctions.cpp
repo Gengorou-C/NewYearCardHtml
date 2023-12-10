@@ -202,32 +202,32 @@ int generateHtml(addressBook book){
   <body>
 )";
 
-  for(int i=1; i < book.getList().size(); i++){
-    std::cout << "\r" << "宛名面 : " << std::to_string(i) + '/' + std::to_string(book.getList().size()-1) << "\r";
+  for(int i=1; i < book.getPeopleList().size(); i++){
+    std::cout << "\r" << "宛名面 : " << std::to_string(i) + '/' + std::to_string(book.getPeopleList().size()-1) << "\r";
     std::string bufferStr = htmlTemplate;
 
-    bufferStr = std::regex_replace(bufferStr, std::regex("\\{宛先氏名\\}"), book.getList()[i].getName());
-    bufferStr = std::regex_replace(bufferStr, std::regex("\\{宛先住所\\}"), book.getList()[i].getAddress());
+    bufferStr = std::regex_replace(bufferStr, std::regex("\\{宛先氏名\\}"), book.getPeopleList()[i].getName());
+    bufferStr = std::regex_replace(bufferStr, std::regex("\\{宛先住所\\}"), book.getPeopleList()[i].getAddress());
     for(int j=1; j < 8; j++){
-      bufferStr = std::regex_replace(bufferStr, std::regex("\\{宛先郵便番号"+std::to_string(j)+"\\}"), book.getList()[i].getPostalCode().substr(j-1,1));
+      bufferStr = std::regex_replace(bufferStr, std::regex("\\{宛先郵便番号"+std::to_string(j)+"\\}"), book.getPeopleList()[i].getPostalCode().substr(j-1,1));
     }
 
-    bufferStr = std::regex_replace(bufferStr, std::regex("\\{差出人氏名\\}"), book.getList()[0].getName());
-    bufferStr = std::regex_replace(bufferStr, std::regex("\\{差出人住所\\}"), book.getList()[0].getAddress());
+    bufferStr = std::regex_replace(bufferStr, std::regex("\\{差出人氏名\\}"), book.getPeopleList()[0].getName());
+    bufferStr = std::regex_replace(bufferStr, std::regex("\\{差出人住所\\}"), book.getPeopleList()[0].getAddress());
     for(int j=1; j < 8; j++){
-      bufferStr = std::regex_replace(bufferStr, std::regex("\\{差出人郵便番号"+std::to_string(j)+"\\}"), book.getList()[0].getPostalCode().substr(j-1,1));
+      bufferStr = std::regex_replace(bufferStr, std::regex("\\{差出人郵便番号"+std::to_string(j)+"\\}"), book.getPeopleList()[0].getPostalCode().substr(j-1,1));
     }
 
-    if(book.getList()[i].getPicturePathStr() != ""){
+    if(book.getPeopleList()[i].getPicturePathStr() != ""){
       std::string className;
-      className = std::filesystem::path(book.getList()[i].getPicturePathStr()).stem().string();
+      className = std::filesystem::path(book.getPeopleList()[i].getPicturePathStr()).stem().string();
       className = std::regex_replace(className, std::regex(" "), "_");
       className = "pic_" + className;
       bufferStr = std::regex_replace(bufferStr, std::regex("class=\"back\""), "class=\"back " + className + "\"");
     }
     generatedHtml = generatedHtml + bufferStr;
   }
-  std::cout << "\r" << "宛名面 : " << std::to_string(book.getList().size()-1) + '/' + std::to_string(book.getList().size()-1) << "\n";
+  std::cout << "\r" << "宛名面 : " << std::to_string(book.getPeopleList().size()-1) + '/' + std::to_string(book.getPeopleList().size()-1) << "\n";
   
   int PictureProcessIndex = 1;
   for (const auto& [key, value] : book.getPictureList()) {
