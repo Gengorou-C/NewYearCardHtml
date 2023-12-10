@@ -61,7 +61,7 @@ int personalData::setAddress(std::string address){
   if(address.empty()){
     address = "";
   }
-  address = std::regex_replace(address, std::regex(R"(-)"), "‐");
+  address = std::regex_replace(address, std::regex(R"(-|−)"), "‐");
   this->address = address;
   return 0;
 }
