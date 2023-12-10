@@ -8,10 +8,17 @@
   <div class="destPostalCode DPC7">{宛先郵便番号7}</div>
 
   <div class="destAddress">{宛先住所}</div>
-  <div class="destName">{宛先氏名}</div>
+  <div class="destName">
+    <div class="destFamilyName">{宛先氏名_姓}</div>
+    <div class="destFirstName">{宛先氏名_名}</div>
+    <div class="title">{敬称}</div>
+  </div>
 
   <div class="origAddress">{差出人住所}</div>
-  <div class="origName">{差出人氏名}</div>
+  <div class="origName">
+    <div class="origFamilyName">{差出人氏名_姓}</div>
+    <div class="origFirstName">{差出人氏名_名}</div>
+  </div>
 
   <div class="origPostalCode OPC1">{差出人郵便番号1}</div>
   <div class="origPostalCode OPC2">{差出人郵便番号2}</div>

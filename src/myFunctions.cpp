@@ -205,14 +205,38 @@ int generateHtml(addressBook book){
   for(int i=1; i < book.getPeopleList().size(); i++){
     std::cout << "\r" << "宛名面 : " << std::to_string(i) + '/' + std::to_string(book.getPeopleList().size()-1) << "\r";
     std::string bufferStr = htmlTemplate;
+    std::string destFamilyName = book.getPeopleList()[i].getFamilyName();
+    std::string destFirstName = book.getPeopleList()[i].getFirstName();
+    std::string destTitle = book.getPeopleList()[i].getTitle();
+    for(int j=0; j<5; j++){
+      if(book.getPeopleList()[i].getJointSignatureName(j) != ""){
+        destFamilyName += "<br />　";
+        destFirstName += "<br />"+book.getPeopleList()[i].getJointSignatureName(j);
+        destTitle += "<br />"+book.getPeopleList()[i].getJointSignatureTitle(j);
+      }
+    }
 
     bufferStr = std::regex_replace(bufferStr, std::regex("\\{宛先氏名\\}"), book.getPeopleList()[i].getName());
+    bufferStr = std::regex_replace(bufferStr, std::regex("\\{宛先氏名_姓\\}"), destFamilyName);
+    bufferStr = std::regex_replace(bufferStr, std::regex("\\{宛先氏名_名\\}"), destFirstName);
+    bufferStr = std::regex_replace(bufferStr, std::regex("\\{敬称\\}"), destTitle);
     bufferStr = std::regex_replace(bufferStr, std::regex("\\{宛先住所\\}"), book.getPeopleList()[i].getAddress());
     for(int j=1; j < 8; j++){
       bufferStr = std::regex_replace(bufferStr, std::regex("\\{宛先郵便番号"+std::to_string(j)+"\\}"), book.getPeopleList()[i].getPostalCode().substr(j-1,1));
     }
 
+    std::string origFamilyName = book.getPeopleList()[0].getFamilyName();
+    std::string origFirstName = book.getPeopleList()[0].getFirstName();
+    for(int j=0; j<5; j++){
+      if(book.getPeopleList()[0].getJointSignatureName(j) != ""){
+        origFamilyName += "<br />　";
+        origFirstName += "<br />"+book.getPeopleList()[0].getJointSignatureName(j);
+      }
+    }
+
     bufferStr = std::regex_replace(bufferStr, std::regex("\\{差出人氏名\\}"), book.getPeopleList()[0].getName());
+    bufferStr = std::regex_replace(bufferStr, std::regex("\\{差出人氏名_姓\\}"), origFamilyName);
+    bufferStr = std::regex_replace(bufferStr, std::regex("\\{差出人氏名_名\\}"), origFirstName);
     bufferStr = std::regex_replace(bufferStr, std::regex("\\{差出人住所\\}"), book.getPeopleList()[0].getAddress());
     for(int j=1; j < 8; j++){
       bufferStr = std::regex_replace(bufferStr, std::regex("\\{差出人郵便番号"+std::to_string(j)+"\\}"), book.getPeopleList()[0].getPostalCode().substr(j-1,1));

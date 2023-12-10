@@ -70,6 +70,9 @@ body {
   font-size:28pt;
   writing-mode: vertical-rl;
 }
+.destFirstName{
+  margin: 20px 0px 20px 0px;
+}
 .origPostalCode{
   position:absolute;
   font-size:11pt;
@@ -98,4 +101,7 @@ body {
   right: 85mm;
   writing-mode: vertical-rl;
   font-size: 14pt;
+}
+.origFirstName{
+  margin-top:10px;
 }
